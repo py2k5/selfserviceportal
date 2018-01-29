@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+{% block content %}
+<!DOCTYPE html>
+<div class="container">
+      <div class="jumbotron">
+      <form action='/autoregister' method='POST'>
+          <div class="form-group">
+            <h3>Register a Zabbix Host or Group</h3>
+            <label class="radio-inline">
+                <input type="radio" name="zbxradio" value="host" checked="checked">Hostname</label>
+            <label class="radio-inline">
+                <input type="radio" name="zbxradio" value="group">Hostgroup</label>
+            <p></p>
+
+            <input type="text" name="host_or_grp_name" class="form-control" id="host_or_grp_name">
+            <input type='checkbox' name='maintenance' value='on' checked=''/> 
+            <label for="maintenance">Put Into Maintenance</label>
+          </div>
+          
+          <button type="submit" class="btn btn-primary" name="button" value="validate">Validate</button>
+          <div class='btn-toolbar pull-right'>
+            <div class='btn-group'>
+              <button type="submit" class="btn btn-primary" name="button" value="execute">Auto Register</button>
+            </div>
+          </div>
+      </form>
+</div>
+{% endblock %}

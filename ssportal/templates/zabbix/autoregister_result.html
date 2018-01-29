@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+{% block content %}
+<!DOCTYPE html>
+    <meta charset="utf-8">
+    {% if title %}
+        <title>{{ title }}</title>
+    {% else %}
+        <title>Result</title>
+    {% endif %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <div class="container">
+      <p>Result of autoregistration</p>
+      <div class="jumbotron">
+         {% if output.Error %}
+             <h3>{{ output.Error }}</h3>
+         {% else %}
+             {% for each_line in output.split('\n') %}
+               <h3>{{ each_line }}</h3>
+             {% endfor %}
+         {% endif %}
+      </div>
+    </div>
+{% endblock %}
