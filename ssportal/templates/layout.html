@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Self Service Portal</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="static/style.css">
+</head>
+
+<body>
+
+<div class="navbar-header">
+    <a class="navbar-brand" rel="/home" href="/home.html" title="SS Portal">
+        <img style="max-width:90px; margin-top: -12px; "
+             src="https://universalheaderconfigurator-a35699dc5.dispatcher.hana.ondemand.com//images/uhLogo.png?4.5.7">
+    </a>
+</div>
+<div class="container" background-color: #555;>
+    <h2>Successfactors SDO Tools Self Service Portal </h2>
+
+</div>
+
+<div class="container">
+<nav class="navbar ">
+  <div class="container-fluid">
+    <div class="navbar-header">
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="/">Home</a></li>
+      <!--li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Zabbix<span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="/autoregister">autoregister</a></li>
+        </ul>
+      </li-->
+      <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Pingdom<span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="/pingdomfilter">pingdomadmin</a></li>
+        </ul>
+      </li>
+      <!--li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Splunk<span class="caret"></span></a>
+        <ul class="dropdown-menu">
+        </ul>
+      </li-->
+    </ul>
+  </div>
+</nav>
+</div>
+
+
+{% block content %}{% endblock %}
+
+<footer class="container-fluid text-center">
+  <p>Copyright 2017 SAP Labs</p>
+</div>
+</body>
+</html>
+
