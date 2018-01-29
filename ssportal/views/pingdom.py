@@ -11,8 +11,8 @@ master_DC = { 'DC02' : 'DC2' , 'DC04': 'DC4', 'DC08':'DC8', 'TEST' : 'TEST' }
 
 
 pingdomApiUrl = 'https://api.pingdom.com/api/2.0/checks'
-auth = ('Bikramjit.Sengupta@sap.com', 'Succ3$$F@ct0r$')
-headers = {'App-Key': 'e369zksyxc0mys9ms579u5ag3yg3bfzj','Account-Email':'hosting_mgr@plateau.com'}
+auth = ('test@email.com', 'password1')
+headers = {'App-Key': 'xxxxxxxxxxx','Account-Email':'xxxxxxxx@email.com'}
 
 pingdom = Blueprint('pingdom', __name__)
 
