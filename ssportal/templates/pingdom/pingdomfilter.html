@@ -1,0 +1,153 @@
+{% extends "layout.html" %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container">
+  <h2>Pingdom Admin Pause/Resume</h2>
+  <div class="jumbotron">
+
+   <form class="form-inline" action="/pingdomfilter" method="post">
+     <div class="form-group">
+     <label for="datacenter">Datacenter:</label>
+     <select name="datacenter" class="selectpicker form-control">
+      {% for dc in data['dcs'] %}
+        {% if data['default_dc'] == dc %}
+          <option value={{dc}} selected>{{dc}} </option>
+        {% else %}
+          <option value={{dc}}>{{dc}}</option>
+        {% endif %}
+      {% endfor %}
+
+     </select>
+     </div>
+    
+
+
+     <div class="form-group">
+     <label for="product">Product:</label>
+     <select name="product" class="selectpicker form-control">
+      {% for product in data['products'] %}
+        {% if data['default_product'] == product %}
+          <option value={{product}} selected>{{product}}</option>
+        {% else %}
+          <option value={{product}}>{{product}}</option>
+        {% endif %}
+      {% endfor %}
+     </select> 
+     </div>
+     <button type="submit" class="btn btn-primary" name="button" value="filter">Filter</button>
+     </form>
+    
+     <p></p>
+     <h2>Pingdom Check Names</h2>
+
+
+     <form action="/pingdomfilter" method="post">
+       {% if  data['checks'] == None %}
+          {{ pass }}
+       {% elif  data['checks'] == 'No products found for this Datacenter' %}
+         <H4>No Checks found for the combination</H4>
+       {% else %}
+            <div class="checkbox">
+                <label><input type="checkbox" class="select-all checkbox" name="select-all" />Check All</label>
+            </div>
+    
+            {% for name in data['checks'] %}
+                <div class="checkbox">
+                    <label><input type="checkbox" class="select-item checkbox" name="pingdomChkName" value="{{ name }}" />{{ name }}</label>
+                </div>
+            {% endfor %}
+
+       {% endif %}
+
+
+      <p></p>
+
+      <button type="submit" class="btn btn-primary" name="button" value="pause">Pause</button>
+      <div class='btn-toolbar pull-right'>
+        <div class='btn-group'>
+            <button type="submit" class="btn btn-primary" name="button" value="resume">Resume</button>
+        </div>
+      </div>
+
+      </form>
+
+  </div>
+</div>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<script>
+    $(function(){
+
+        //button select all or cancel
+        $("#select-all").click(function () {
+            var all = $("input.select-all")[0];
+            all.checked = !all.checked
+            var checked = all.checked;
+            $("input.select-item").each(function (index,item) {
+                item.checked = checked;
+            });
+        });
+
+        //button select invert
+        $("#select-invert").click(function () {
+            $("input.select-item").each(function (index,item) {
+                item.checked = !item.checked;
+            });
+            checkSelected();
+        });
+
+        //button get selected info
+        $("#selected").click(function () {
+            var items=[];
+            $("input.select-item:checked:checked").each(function (index,item) {
+                items[index] = item.value;
+            });
+            if (items.length < 1) {
+                alert("no selected items!!!");
+            }else {
+                var values = items.join(',');
+                console.log(values);
+                var html = $("<div></div>");
+                html.html("selected:"+values);
+                html.appendTo("body");
+            }
+        });
+
+        //column checkbox select all or cancel
+        $("input.select-all").click(function () {
+            var checked = this.checked;
+            $("input.select-item").each(function (index,item) {
+                item.checked = checked;
+            });
+        });
+
+        //check selected items
+        $("input.select-item").click(function () {
+            var checked = this.checked;
+            console.log(checked);
+            checkSelected();
+        });
+
+        //check is all selected
+        function checkSelected() {
+            var all = $("input.select-all")[0];
+            var total = $("input.select-item").length;
+            var len = $("input.select-item:checked:checked").length;
+            console.log("total:"+total);
+            console.log("len:"+len);
+            all.checked = len===total;
+        }
+    });
+</script>
+{% endblock %}
+</html>

@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+{% block content %}
+<!DOCTYPE html>
+<div class="container">
+  <h2>Pingdom Result </h2>
+  <div class="jumbotron">
+  <form>
+      {% for row in data %}
+        <h3>{{ row }}</h3>
+      {% endfor %}
+    
+  </form>
+  </div>
+
+</div>
+
+{% endblock %}
