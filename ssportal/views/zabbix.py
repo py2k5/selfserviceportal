@@ -57,7 +57,7 @@ def autoregister():
             except:
                 return "Could not execute"
         #}
-        prog = subprocess.Popen(["ssh", "zabbix@10.4.196.50", cmd], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        prog = subprocess.Popen(["ssh", "zabbix@hostname", cmd], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         out,err = prog.communicate()
         data = "{} {}".format(out,err)
         return render_template('zabbix/autoregister_result.html', output=data)
